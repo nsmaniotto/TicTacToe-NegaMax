@@ -61,10 +61,22 @@ alignement(D, Matrix) :- diagonale(D,Matrix).
 	
 % La ligne L appartient-elle à la matrice M ?
 ligne(L, M) :-  nth1(_, M, L).
+
+test_ligne() :-
+	M = [[a,b,c], [d,e,f], [g,h,i]],
+	ligne([a,b,c], M),
+	ligne([d,e,f], M),
+	ligne([g,h,i], M).
  
 % La colonne C appartient-elle à la matrice M ?
 colonne(C,M) :-
 	maplist(nth0(_), M, C).
+
+test_colonne() :-
+	M = [[a,b,c], [d,e,f], [g,h,i]],
+	colonne([a,d,g], M),
+	colonne([b,e,h], M),
+	colonne([c,f,i], M).
 
 
 
@@ -205,4 +217,3 @@ heuristique(J,Situation,H) :-		% cas 2
 
 % A FAIRE 					cas 3
 % heuristique(J,Situation,H) :- ? ? ? ?
-
