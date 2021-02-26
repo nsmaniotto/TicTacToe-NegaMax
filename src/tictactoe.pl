@@ -177,10 +177,15 @@ alignement_gagnant(Ali, J) :-
 	length(ListeE, TailleE),
 	length(Ali, TailleE).
 
-
 alignement_perdant(Ali, J) :- 
 	adversaire(J,A),
 	alignement_gagnant(Ali, A).
+
+test_alignements() :-
+	alignement_gagnant([x,x,x], x),
+	(alignement_gagnant([x,o,x], x) -> false; true),
+	
+	alignement_perdant([o,o,o],x).
 
 
 	/* ****************************
