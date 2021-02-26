@@ -119,8 +119,8 @@ possible(  [],  _).
 	faut pas realiser l'unification.
 	*/
 
-% A FAIRE 
-% unifiable(X,J) :- ? ? ? ? ?
+unifiable(X,J) :- var(X).
+unifiable(X,J) :- X == J.
 	
 	/**********************************
 	 DEFINITION D'UN ALIGNEMENT GAGNANT
