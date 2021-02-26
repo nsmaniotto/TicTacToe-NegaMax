@@ -87,9 +87,9 @@ colonne(C,M) :-
 diagonale(D, M) :- 
 	premiere_diag(1,D,M).
 
-	% deuxieme definition A COMPLETER
-
-% diagonale(D, M) :- ? ? ? ?
+diagonale(D, M) :- 
+	length(M, K),
+	seconde_diag(K,D,M).
 
 	
 premiere_diag(_,[],[]).
@@ -98,7 +98,11 @@ premiere_diag(K,[E|D],[Ligne|M]) :-
 	K1 is K+1,
 	premiere_diag(K1,D,M).
 
-% seconde_diag(K,M,D) :- ? ? ? ?
+seconde_diag(_,[],[]).
+seconde_diag(K,[E|D],[Ligne|M]) :-
+	nth1(K,Ligne,E),
+	K1 is K-1,
+	seconde_diag(K1,D,M).
 
 
 	/*****************************
