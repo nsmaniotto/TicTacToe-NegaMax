@@ -170,6 +170,8 @@ possible pour J qui n'a aucun element encore libre.
 
 % alignement_gagnant(+Ali, ?J)
 alignement_gagnant(Ali, J) :- 
+	ground(Ali), % +Ali
+	
 	% Vérifier que l'alignement est possible
 	possible(Ali, J),
 	% Vérifier que aucun élément de l'alignement n'est libre
@@ -184,7 +186,7 @@ alignement_perdant(Ali, J) :-
 test_alignements() :-
 	alignement_gagnant([x,x,x], x),
 	(alignement_gagnant([x,o,x], x) -> false; true),
-	
+
 	alignement_perdant([o,o,o],x).
 
 
