@@ -171,7 +171,7 @@ possible pour J qui n'a aucun element encore libre.
 % alignement_gagnant(+Ali, ?J)
 alignement_gagnant(Ali, J) :- 
 	ground(Ali), % +Ali
-	
+
 	% Vérifier que l'alignement est possible
 	possible(Ali, J),
 	% Vérifier que aucun élément de l'alignement n'est libre
@@ -231,5 +231,21 @@ heuristique(J,Situation,H) :-		% cas 2
 % on ne vient ici que si les cut precedents n'ont pas fonctionne,
 % c-a-d si Situation n'est ni perdante ni gagnante.
 
-% A FAIRE 					cas 3
-% heuristique(J,Situation,H) :- ? ? ? ?
+heuristique(J,Situation,H) :- 		% cas 3
+	% le nombre d’alignements potentiellement réalisables par J dans la situation S
+	findall(AliJ, (alignement(AliJ, Situation), possible(AliJ, J)), ListeAliJ),
+	length(ListeAliJ, NBJ),
+	% le nombre d’alignements potentiellement réalisables par l’adversaire de J dans la même situation S
+	adversaire(J, A),
+	findall(AliA, (alignement(AliA, Situation), possible(AliA, A)), ListeAliA),
+	length(ListeAliA, NBA),
+
+	% Calcul de H = nb_alignement_possible_J - nb_alignement_possible_A
+	H is NBJ - NBA.
+
+test_heuristique :-
+	joueur_initial(_J),
+	_S = [[_,_,_], [_,_J,_], [_,_,_]], % Situation initiale d'après l'énnoncé
+	heuristique(_J,_S,4),
+	adversaire(_J,_A),
+	heuristique(_A,_S,-4).
