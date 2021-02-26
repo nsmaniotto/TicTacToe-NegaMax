@@ -147,11 +147,19 @@ possible pour J qui n'a aucun element encore libre.
 		
 	/* Un alignement perdant pour J est un alignement gagnant pour son adversaire. */
 
-% A FAIRE
+% alignement_gagnant(+Ali, ?J)
+alignement_gagnant(Ali, J) :- 
+	% Vérifier que l'alignement est possible
+	possible(Ali, J),
+	% Vérifier que aucun élément de l'alignement n'est libre
+	findall(E, (nth1(_, Ali, E), ground(E)), ListeE),
+	length(ListeE, TailleE),
+	length(Ali, TailleE).
 
-% alignement_gagnant(Ali, J) :- ? ? ? ?
 
-% alignement_perdant(Ali, J) :- ? ? ? ?
+alignement_perdant(Ali, J) :- 
+	adversaire(J,A),
+	alignement_gagnant(Ali, A).
 
 
 	/* ****************************
