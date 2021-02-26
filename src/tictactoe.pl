@@ -138,6 +138,10 @@ possible(  [],  _).
 
 unifiable(X,J) :- var(X).
 unifiable(X,J) :- X == J.
+
+test_unifiable() :-
+	unifiable(X,x),
+	unifiable(x,x).
 	
 	/**********************************
 	 DEFINITION D'UN ALIGNEMENT GAGNANT
