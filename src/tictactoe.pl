@@ -103,6 +103,11 @@ diagonale(D, M) :-
 	length(M, K),
 	seconde_diag(K,D,M).
 
+test_diagonale() :-
+	M = [[a,b,c], [d,e,f], [g,h,i]],
+	diagonale([a,e,i], M),
+	diagonale([c,e,g], M).
+
 	
 premiere_diag(_,[],[]).
 premiere_diag(K,[E|D],[Ligne|M]) :-
