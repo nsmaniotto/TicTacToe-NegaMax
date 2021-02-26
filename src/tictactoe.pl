@@ -62,19 +62,10 @@ alignement(D, Matrix) :- diagonale(D,Matrix).
 % La ligne L appartient-elle à la matrice M ?
 ligne(L, M) :-  nth1(_, M, L).
  
-/*	La colonne C appartient-elle à la matrice M ?
-Soit:	(1) - transposée de C (donc une ligne) appartient à M
-		(2) - pour chaque élément de C, vérifier qu'il appartient à M sur 
-		une ligne différente que les autres éléments de C
-*/
+% La colonne C appartient-elle à la matrice M ?
 colonne(C,M) :-
-	% Cas 1
+	maplist(nth0(_), M, C).
 
-	% Cas 2
-	% Trouver toutes les lignes impliquées
-	% Vérifier que chaque ligne trouvée appartient à la matrice (fait dans le 3ème nth1)
-	% Vérifier que chaque ligne trouvée n'est trouvée qu'une seule fois (2/3ème nth1 avec _Ie)
-	findall(L, (nth1(_Ic, L, E), nth1(_Ie, C, E), nth1(_Ie, M, L)), ListeLignesTrouvees).
 
 
 
