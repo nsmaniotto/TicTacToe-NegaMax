@@ -68,6 +68,23 @@ A FAIRE : ECRIRE ici les clauses de negamax/5
 		Coup = rien,
 		heuristique(J, Etat, Val).
 
+	negamax(J, Etat, P, Pmax, [Coup, Val]) :-	% cas 3
+		P < Pmax,
+		var(Etat),	% J peut encore jouer si le tableau n'est pas totalement lié/instancié
+		
+		% CP: Coup_possible
+		% SS: Situation_suivante
+		% LCP: Liste_coups_possibles
+		findall([CP, SS], successeurs(J, Etat, [CP, SS]), LCP),
+
+		% LC: Liste_de_couples
+		loop_negamax(J, P, Pmax, LCP, LC),
+
+		% MC: Meilleur_Couple
+		meilleur(LC, MC),
+
+		Meilleur_Couple = [Coup, Val].
+
 
 
 	/*******************************************
