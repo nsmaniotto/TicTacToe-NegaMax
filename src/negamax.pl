@@ -59,18 +59,14 @@ A FAIRE : ECRIRE ici les clauses de negamax/5
 
 	negamax(J, Etat, Pmax, Pmax, [rien, Val]) :-	% cas 1
 		
-		heuristique(J, Etat, Val).
+		heuristique(J, Etat, Val),!.
 
-	negamax(J, Etat, P, Pmax, [rien, Val]) :-	% cas 2
+	negamax(J, Etat, _, _, [rien, Val]) :-	% cas 2
 		
-		P < Pmax,
 		ground(Etat), 	% Le tableau est complet (totalement instanci�)
-		heuristique(J, Etat, Val).
+		heuristique(J, Etat, Val),!.
 
-	negamax(J, Etat, P, Pmax, MC) :-	% cas 3
-		
-		P < Pmax,
-		nth1(_,Etat,L),nth1(_,L,Elem),var(Elem),	% J peut encore jouer si le tableau n'est pas totalement li�/instanci�
+	negamax(J, Etat, P, Pmax, [MC1,MV]) :-	% cas 3
 		
 		% CP: Coup_possible
 		% SS: Situation_suivante
@@ -84,7 +80,7 @@ A FAIRE : ECRIRE ici les clauses de negamax/5
 		
 
 		% MC: Meilleur_Couple
-		meilleur(LC, MC).
+		meilleur(LC, [MC1, MV1]),MV is -MV1.
 		
 
 
@@ -158,12 +154,10 @@ A FAIRE : ECRIRE ici les clauses de meilleur/2
 	meilleur([Couple], Couple). % Le meilleur dans une liste � 1 �l�ment est ce �l�ment
 	
 	meilleur([[C, V] | Couple_suivant], Meilleur_Couple) :- 
-		meilleur(Couple_suivant, Meilleur_Couple1),
-
-		Meilleur_Couple1 = [_MC1, MV1],
+		meilleur(Couple_suivant, [MC1, MV1]),
 
 		(MV1 < V) -> 
-			Meilleur_Couple = Meilleur_Couple1
+			Meilleur_Couple = [MC1, MV1]
 			;
 			Meilleur_Couple = [C, V].		
 

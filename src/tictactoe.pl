@@ -203,7 +203,7 @@ test_alignements() :-
 % A FAIRE
 % successeur(J, Etat,[L,C]) :- ? ? ? ?  
 successeur(J,Etat,[L,C]) :-
-	nth1(L,Etat,Lselected),nth1(C,Lselected,J)
+	nth1(L,Etat,Lselected),nth1(C,Lselected,X),var(X),X=J
 .
 
 	/**************************************
