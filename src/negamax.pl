@@ -57,33 +57,35 @@ A FAIRE : ECRIRE ici les clauses de negamax/5
 .....................................
 	*/
 
-	negamax(J, Etat, P, Pmax, [Coup, Val]) :-	% cas 1
-		P = Pmax,
-		Coup = rien,
+	negamax(J, Etat, Pmax, Pmax, [rien, Val]) :-	% cas 1
+		
 		heuristique(J, Etat, Val).
 
-	negamax(J, Etat, P, Pmax, [Coup, Val]) :-	% cas 2
+	negamax(J, Etat, P, Pmax, [rien, Val]) :-	% cas 2
+		
 		P < Pmax,
 		ground(Etat), 	% Le tableau est complet (totalement instanci�)
-		Coup = rien,
 		heuristique(J, Etat, Val).
 
-	negamax(J, Etat, P, Pmax, [Coup, Val]) :-	% cas 3
+	negamax(J, Etat, P, Pmax, MC) :-	% cas 3
+		
 		P < Pmax,
-		var(Etat),	% J peut encore jouer si le tableau n'est pas totalement li�/instanci�
+		nth1(_,Etat,L),nth1(_,L,Elem),var(Elem),	% J peut encore jouer si le tableau n'est pas totalement li�/instanci�
 		
 		% CP: Coup_possible
 		% SS: Situation_suivante
 		% LCP: Liste_coups_possibles
-		findall([CP, SS], successeurs(J, Etat, [CP, SS]), LCP),
+		
+		successeurs(J, Etat, LCP),
+		
 
 		% LC: Liste_de_couples
 		loop_negamax(J, P, Pmax, LCP, LC),
+		
 
 		% MC: Meilleur_Couple
-		meilleur(LC, MC),
-
-		MC = [Coup, Val].
+		meilleur(LC, MC).
+		
 
 
 
@@ -100,10 +102,13 @@ A FAIRE : ECRIRE ici les clauses de negamax/5
 	 */
 
 successeurs(J,Etat,Succ) :-
+	
 	copy_term(Etat, Etat_Suiv),
+	
 	findall([Coup,Etat_Suiv],
 		    successeur(J,Etat_Suiv,Coup),
 		    Succ).
+	
 
 	/*************************************
          Boucle permettant d'appliquer negamax 
@@ -117,8 +122,9 @@ successeurs(J,Etat,Succ) :-
 	*/
 
 
-loop_negamax(_,_, _  ,[],                []).
+loop_negamax(_,_, _  ,[],                []). 
 loop_negamax(J,P,Pmax,[[Coup,Suiv]|Succ],[[Coup,Vsuiv]|Reste_Couples]) :-
+	
 	loop_negamax(J,P,Pmax,Succ,Reste_Couples), % permet de récupérer la liste (Reste_Couples) des coups avec leur valeur associée
 	adversaire(J,A), % on passe à l'adversaire
 	Pnew is P+1, % on augmente le compteur de profondeur
@@ -168,8 +174,9 @@ A FAIRE : ECRIRE ici les clauses de meilleur/2
   	*******************/
 
 main(B,V, Pmax) :-
-
-	true.        
+	joueur_initial(J),
+	situation_initiale(I),
+	negamax(J, I, 0, Pmax, [B, V]).
 
 
 	/*
