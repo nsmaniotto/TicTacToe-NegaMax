@@ -244,8 +244,8 @@ heuristique(J,Situation,H) :- 		% cas 3
 	H is NBJ - NBA.
 
 test_heuristique :-
-	joueur_initial(_J),
-	_S = [[_,_,_], [_,_J,_], [_,_,_]], % Situation initiale d'après l'énnoncé
-	heuristique(_J,_S,4),
-	adversaire(_J,_A),
-	heuristique(_A,_S,-4).
+	joueur_initial(J),
+	S = [[_,_,_], [_,J,_], [_,_,_]], % Situation initiale d'après l'énnoncé
+	heuristique(J,S,4),
+	adversaire(J,A),
+	heuristique(A,S,-4).
