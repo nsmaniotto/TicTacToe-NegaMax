@@ -136,11 +136,11 @@ possible(  [],  _).
 	faut pas realiser l'unification.
 	*/
 
-unifiable(X,J) :- var(X).
+unifiable(X,_J) :- var(X).
 unifiable(X,J) :- X == J.
 
 test_unifiable() :-
-	unifiable(X,x),
+	unifiable(_X,x),
 	unifiable(x,x).
 	
 	/**********************************
