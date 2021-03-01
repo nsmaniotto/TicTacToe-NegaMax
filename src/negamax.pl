@@ -62,6 +62,12 @@ A FAIRE : ECRIRE ici les clauses de negamax/5
 		Coup = rien,
 		heuristique(J, Etat, Val).
 
+	negamax(J, Etat, P, Pmax, [Coup, Val]) :-	% cas 2
+		P < Pmax,
+		ground(Etat), 	% Le tableau est complet (totalement instancié)
+		Coup = rien,
+		heuristique(J, Etat, Val).
+
 
 
 	/*******************************************
