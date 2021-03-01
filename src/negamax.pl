@@ -177,7 +177,13 @@ A FAIRE : ECRIRE ici les clauses de meilleur/2
 			;
 			Meilleur_Couple = [C, V].		
 
+	test_meilleur() :-
+		meilleur([[[2,2], 4]], Couple1),
+		Couple1 = [[2,2], 4],
 
+		Liste_Couples = [[_, 4] | [[_, 3]]],
+		meilleur(Liste_Couples, Meilleur_Couple),
+		Meilleur_Couple = [_, 3].
 
 	/******************
   	PROGRAMME PRINCIPAL
