@@ -83,7 +83,7 @@ A FAIRE : ECRIRE ici les clauses de negamax/5
 		% MC: Meilleur_Couple
 		meilleur(LC, MC),
 
-		Meilleur_Couple = [Coup, Val].
+		MC = [Coup, Val].
 
 
 
@@ -147,6 +147,18 @@ A FAIRE : commenter chaque litteral de la 2eme clause de loop_negamax/5,
 
 A FAIRE : ECRIRE ici les clauses de meilleur/2
 	*/
+
+	meilleur([Couple], Couple). % Le meilleur dans une liste à 1 élément est ce élément
+	
+	meilleur([[C, V] | Couple_suivant], Meilleur_Couple) :- 
+		meilleur(Couple_suivant, Meilleur_Couple1),
+
+		Meilleur_Couple1 = [_MC1, MV1],
+
+		(MV1 < V) -> 
+			Meilleur_Couple = Meilleur_Couple1
+			;
+			Meilleur_Couple = [C, V].		
 
 
 
