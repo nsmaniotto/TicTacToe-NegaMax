@@ -80,9 +80,25 @@ A FAIRE : ECRIRE ici les clauses de negamax/5
 		
 
 		% MC: Meilleur_Couple
-		meilleur(LC, [MC1, MV1]),MV is -MV1.
+		meilleur(LC, [MC1, MV1]),
+		MV is -MV1.
 		
 
+	test_negamax() :-
+		joueur_initial(J),
+
+		% Cas 1
+		situation_initiale(Etat1),
+		negamax(J, Etat1, 0, 0, [rien, _]),
+
+		% Cas 2
+		Etat2 = [[x,o,x], [o,x,o], [o,x,o]],
+		negamax(J, Etat2, 0, 1, [rien, _]),
+
+		% Cas 3
+		situation_initiale(Etat3),
+		negamax(J, Etat3, 0, 1, [Coup, _]),
+		Coup \= rien.
 
 
 	/*******************************************
