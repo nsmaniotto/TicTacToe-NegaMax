@@ -57,6 +57,12 @@ A FAIRE : ECRIRE ici les clauses de negamax/5
 .....................................
 	*/
 
+	negamax(J, Etat, P, Pmax, [Coup, Val]) :-	% cas 1
+		P = Pmax,
+		Coup = rien,
+		heuristique(J, Etat, Val).
+
+
 
 	/*******************************************
 	 DEVELOPPEMENT D'UNE SITUATION NON TERMINALE
