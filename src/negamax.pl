@@ -132,8 +132,8 @@ main(B,V, Pmax) :-
 
 	/*
 A FAIRE :
-	Compléter puis tester le programme principal pour plusieurs valeurs de la profondeur maximale.
+	Complï¿½ter puis tester le programme principal pour plusieurs valeurs de la profondeur maximale.
 	Pmax = 1, 2, 3, 4 ...
-	Commentez les résultats obtenus.
+	Commentez les rï¿½sultats obtenus.
 	*/
 
