@@ -116,12 +116,13 @@ successeurs(J,Etat,Succ) :-
 	a partir de la liste des couples [Coup, Situation_Suivante]
 	*/
 
+
 loop_negamax(_,_, _  ,[],                []).
 loop_negamax(J,P,Pmax,[[Coup,Suiv]|Succ],[[Coup,Vsuiv]|Reste_Couples]) :-
-	loop_negamax(J,P,Pmax,Succ,Reste_Couples),
-	adversaire(J,A),
-	Pnew is P+1, 
-	negamax(A,Suiv,Pnew,Pmax, [_,Vsuiv]).
+	loop_negamax(J,P,Pmax,Succ,Reste_Couples), % permet de rÃ©cupÃ©rer la liste (Reste_Couples) des coups avec leur valeur associÃ©e
+	adversaire(J,A), % on passe Ã  l'adversaire
+	Pnew is P+1, % on augmente le compteur de profondeur
+	negamax(A,Suiv,Pnew,Pmax, [_,Vsuiv]). % on exÃ©cute l'algorithme negamax du point de vue de l'adversaire ; permet de rÃ©cupÃ©rer la valeur du coup courant
 
 	/*
 
@@ -148,7 +149,7 @@ A FAIRE : commenter chaque litteral de la 2eme clause de loop_negamax/5,
 A FAIRE : ECRIRE ici les clauses de meilleur/2
 	*/
 
-	meilleur([Couple], Couple). % Le meilleur dans une liste à 1 élément est ce élément
+	meilleur([Couple], Couple). % Le meilleur dans une liste ï¿½ 1 ï¿½lï¿½ment est ce ï¿½lï¿½ment
 	
 	meilleur([[C, V] | Couple_suivant], Meilleur_Couple) :- 
 		meilleur(Couple_suivant, Meilleur_Couple1),
