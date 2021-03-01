@@ -120,7 +120,32 @@ successeurs(J,Etat,Succ) :-
 	findall([Coup,Etat_Suiv],
 		    successeur(J,Etat_Suiv,Coup),
 		    Succ).
+test_successeurs :-
 	
+	M = [[_,_,_],[_,_,_],[_,_,_]],
+	successeurs(x,M,Succ),
+	SuccPoss = [[[1,1],[[x,_,_],[_,_,_],[_,_,_]]],
+			[[1,1],[[_,x,_],[_,_,_],[_,_,_]]],
+			[[1,1],[[_,_,x],[_,_,_],[_,_,_]]],
+			[[1,1],[[_,_,_],[x,_,_],[_,_,_]]],
+			[[1,1],[[_,_,_],[_,x,_],[_,_,_]]],
+			[[1,1],[[_,_,_],[_,_,x],[_,_,_]]],
+			[[1,1],[[_,_,_],[_,_,_],[x,_,_]]],
+			[[1,1],[[_,_,_],[_,_,_],[_,x,_]]],
+			[[1,1],[[_,_,_],[_,_,_],[_,_,x]]]],
+	test_successeurs_loop(Succ,SuccPoss,NbTrue),
+	length(Succ,NbElem),NbTrue = NbElem
+	
+.
+test_successeurs_loop(_,[],0).
+test_successeurs_loop(Ltestee,[Hposs|Lposs],NbTrue1) :-
+	test_successeurs_loop(Ltestee,Lposs,NbTrue),
+	nth1(_,Ltestee,Hposs) -> (
+		NbTrue1 is NbTrue+1
+	;
+		NbTrue1 is NbTrue)
+	
+.
 
 	/*************************************
          Boucle permettant d'appliquer negamax 

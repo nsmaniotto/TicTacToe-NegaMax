@@ -205,6 +205,14 @@ test_alignements() :-
 successeur(J,Etat,[L,C]) :-
 	nth1(L,Etat,Lselected),nth1(C,Lselected,X),var(X),X=J
 .
+test_successeur :-
+	M = [[_,_,_],[_,_,_],[_,_,_]],
+	successeur(x,M,[1,1]), M=[[x,_,_],[_,_,_],[_,_,_]],
+
+	
+	M = [[_,_,_],[_,_,_],[_,_,_]],
+	successeur(x,M,[2,2]), M=[[_,_,_],[_,x,_],[_,_,_]]
+.
 
 	/**************************************
    	 EVALUATION HEURISTIQUE D'UNE SITUATION
