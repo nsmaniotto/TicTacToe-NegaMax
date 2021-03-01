@@ -205,16 +205,6 @@ test_alignements() :-
 successeur(J,Etat,[L,C]) :-
 	nth1(L,Etat,Lselected),nth1(C,Lselected,J)
 .
-/*
-successeur(J,[_|InputReste],[L,C]) :-
-	L1 is L-1,successeur(J,InputReste,[L1,C])
-.
-
-innerloop_successeur(_,[],_).
-innerloop_successeur(J,0,[J|_]).
-innerloop_successeur(J,C,[_|Linput]) :-
-	C1 is C-1,innerloop_successeur(J,C1,Linput)
-.*/
 
 	/**************************************
    	 EVALUATION HEURISTIQUE D'UNE SITUATION

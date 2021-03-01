@@ -64,13 +64,13 @@ A FAIRE : ECRIRE ici les clauses de negamax/5
 
 	negamax(J, Etat, P, Pmax, [Coup, Val]) :-	% cas 2
 		P < Pmax,
-		ground(Etat), 	% Le tableau est complet (totalement instancié)
+		ground(Etat), 	% Le tableau est complet (totalement instanciï¿½)
 		Coup = rien,
 		heuristique(J, Etat, Val).
 
 	negamax(J, Etat, P, Pmax, [Coup, Val]) :-	% cas 3
 		P < Pmax,
-		var(Etat),	% J peut encore jouer si le tableau n'est pas totalement lié/instancié
+		var(Etat),	% J peut encore jouer si le tableau n'est pas totalement liï¿½/instanciï¿½
 		
 		% CP: Coup_possible
 		% SS: Situation_suivante
@@ -120,7 +120,7 @@ loop_negamax(_,_, _  ,[],                []).
 loop_negamax(J,P,Pmax,[[Coup,Suiv]|Succ],[[Coup,Vsuiv]|Reste_Couples]) :-
 	loop_negamax(J,P,Pmax,Succ,Reste_Couples),
 	adversaire(J,A),
-	Pnew is P+1,
+	Pnew is P+1, 
 	negamax(A,Suiv,Pnew,Pmax, [_,Vsuiv]).
 
 	/*
